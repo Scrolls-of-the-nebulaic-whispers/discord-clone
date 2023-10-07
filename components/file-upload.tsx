@@ -7,13 +7,13 @@ import Image from "next/image";
 
 import "@uploadthing/react/styles.css";
 
-interface IProps {
+interface Props {
   endpoint: "serverImage" | "messageFile";
   onChange: (url?: string) => void;
   value: string;
 }
 
-const FileUpload: FC<IProps> = ({ endpoint, value, onChange }) => {
+const FileUpload: FC<Props> = ({ endpoint, value, onChange }) => {
   const fileType = value?.split(".").pop();
 
   if (value && fileType !== "pdf") {
