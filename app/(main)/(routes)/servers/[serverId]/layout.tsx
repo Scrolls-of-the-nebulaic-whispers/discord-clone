@@ -1,9 +1,7 @@
 import { ReactNode } from "react";
 import { redirect } from "next/navigation";
-import { parseArgs } from "util";
 
 import { redirectToSignIn } from "@clerk/nextjs";
-import NavigationSidebar from "@/components/navigation/navigation-sidebar";
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { ServerSidebar } from "@/components/server/server-sidebar";
