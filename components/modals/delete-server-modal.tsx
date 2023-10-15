@@ -17,19 +17,19 @@ import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-const LeaveServerModal = () => {
+const DeleteServerModal = () => {
   const { data, isOpen, onClose, type } = useModal();
   const [isLoadind, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const isModalOpen = isOpen && type === "leaveServer";
+  const isModalOpen = isOpen && type === "deleteServer";
   const { server } = data;
 
   const onClick = async () => {
     try {
       setIsLoading(true);
 
-      await axios.patch(`/api/servers/${server?.id}/leave`);
+      await axios.delete(`/api/servers/${server?.id}`);
 
       onClose();
       router.refresh();
@@ -46,14 +46,12 @@ const LeaveServerModal = () => {
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
-            Leave server
+            Delete server
           </DialogTitle>
 
           <DialogDescription>
-            Are you sure you want to leave{"  "}
-            <span className="font-semibold text-indigo-500">
-              {server?.name}
-            </span>
+            Are you sure you want to delete{"  "}
+            <span className="font-semibold text-rose-500">{server?.name}</span>
           </DialogDescription>
         </DialogHeader>
 
@@ -73,4 +71,4 @@ const LeaveServerModal = () => {
   );
 };
 
-export default LeaveServerModal;
+export default DeleteServerModal;
