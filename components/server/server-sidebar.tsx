@@ -4,6 +4,7 @@ import { ChannelType } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { Server } from "@prisma/client";
 import { ServerHeader } from "./server-header";
+import { ServerWithMembers } from "@/types";
 interface Props {
   serverId: string;
 }
@@ -29,6 +30,9 @@ export const ServerSidebar = async ({ serverId }: Props) => {
         orderBy: {
           role: "asc",
         },
+        include: {
+          profile: true,
+        },
       },
     },
   });
@@ -38,16 +42,20 @@ export const ServerSidebar = async ({ serverId }: Props) => {
   }
 
   const textChannels = server?.channels.filter(
-    (ch) => ch.type === ChannelType.TEXT
+    (ch: any) => ch.type === ChannelType.TEXT
   );
   const audioChannels = server?.channels.filter(
-    (ch) => ch.type === ChannelType.AUDIO
+    (ch: any) => ch.type === ChannelType.AUDIO
   );
   const videoChannels = server?.channels.filter(
-    (ch) => ch.type === ChannelType.VIDEO
+    (ch: any) => ch.type === ChannelType.VIDEO
   );
-  const members = server?.members.filter((m) => m.profileId !== profile.id);
-  const role = server?.members.find((m) => m.profileId === profile.id)?.role;
+  const members = server?.members.filter(
+    (m: any) => m.profileId !== profile.id
+  );
+  const role = server?.members.find(
+    (m: any) => m.profileId === profile.id
+  )?.role;
 
   return (
     <div className="flex flex-col h-full text-primary w-full dark:bg-[#2b2d31] bg-[#f2f3f5]">
