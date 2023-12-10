@@ -42,8 +42,8 @@ const ServerSection: FC<Props> = ({
         </ActionTooltip>
       )}
 
-      {role !== MemberRole.ADMIN && sectionType === "members" && (
-        <ActionTooltip label="Manage " side="top">
+      {role === MemberRole.ADMIN && sectionType === "members" && (
+        <ActionTooltip label="Manage members" side="top">
           <button
             onClick={() => onOpen("members", { server })}
             className="text-zinc-500 hover:text-zinc-600 

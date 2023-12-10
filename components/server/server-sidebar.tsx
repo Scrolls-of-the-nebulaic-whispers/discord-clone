@@ -119,7 +119,9 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
                 type: "member",
                 data: members?.map((member: Member) => ({
                   id: member.id,
-                  name: member.profile.name,
+                  // TODO: casting to "any", because otherwise it can't tell
+                  // that member actually has the profile. Linting fails
+                  name: (member as any).profile.name,
                   icon: roleIconMap[member.role],
                 })),
               },
@@ -197,7 +199,13 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
             />
             <div className="space-y-[2px]">
               {members.map((member: Member) => (
-                <ServerMember key={member.id} member={member} server={server} />
+                // TODO: casting to "any", because otherwise it can't tell
+                // that member actually has the profile. Linting fails
+                <ServerMember
+                  key={member.id}
+                  member={member as any}
+                  server={server}
+                />
               ))}
             </div>
           </div>
