@@ -4,10 +4,6 @@ datasource db {
   relationMode = "prisma"
 }
 
-generator client {
-  provider = "prisma-client-js"
-}
-
 model Profile {
   id        String    @id @default(uuid())
   userId    String    @unique
@@ -56,8 +52,8 @@ model Member {
   createdAt              DateTime        @default(now())
   updatedAt              DateTime        @default(now()) @updatedAt
 
-  @@index(profileId)
-  @@index(serverId)
+  @@index([profileId])
+  @@index([serverId])
 }
 
 enum ChannelType {
