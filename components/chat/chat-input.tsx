@@ -5,10 +5,13 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
-import { Plus, Smile } from "lucide-react";
+import { Plus } from "lucide-react";
 import { Input } from "../ui/input";
 import queryString from "query-string";
 import axios from "axios";
+import { useModal } from "@/hooks/use-modal-store";
+import { EmojiPicker } from "../emoji-picker";
+import { useRouter } from "next/navigation";
 
 interface Props {
   apiUrl: string;
@@ -22,6 +25,9 @@ const formSchema = z.object({
 });
 
 const ChatInput = ({ apiUrl, query, name, type }: Props) => {
+  const { onOpen } = useModal();
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
       content: "",
@@ -39,6 +45,9 @@ const ChatInput = ({ apiUrl, query, name, type }: Props) => {
       });
 
       axios.post(url, values);
+
+      form.reset();
+      router.refresh();
     } catch (error) {
       console.log(error);
     }
@@ -56,7 +65,7 @@ const ChatInput = ({ apiUrl, query, name, type }: Props) => {
                 <div className="relative p-4 pb-6">
                   <button
                     type="button"
-                    onClick={() => {}}
+                    onClick={() => onOpen("messageFile", { apiUrl, query })}
                     className="absolute top-7 left-8 h-[24px] w-[24px] bg-zinc-500 dark:bg-zinc-400 hover:bg-zinc-600 dark:hover:bg-zinc-300 transition rounded-full p-1 flex items-center justify-center"
                   >
                     <Plus className="text-white dark:text-[#313338]" />
@@ -70,7 +79,11 @@ const ChatInput = ({ apiUrl, query, name, type }: Props) => {
                     {...field}
                   />
                   <div className="absolute top-7 right-8">
-                    <Smile />
+                    <EmojiPicker
+                      onChange={(emoji) =>
+                        field.onChange(`${field.value}${emoji}`)
+                      }
+                    />
                   </div>
                 </div>
               </FormControl>
