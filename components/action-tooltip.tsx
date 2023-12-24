@@ -13,7 +13,7 @@ interface Props {
   align?: "start" | "center" | "end";
   children: ReactNode;
   label: string;
-  side: "top" | "right" | "bottom" | "left";
+  side?: "top" | "right" | "bottom" | "left";
 }
 
 import React from "react";
