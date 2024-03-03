@@ -13,6 +13,7 @@ export async function GET(req: Request) {
 
     const cursor = searchParams.get("cursor");
     const channelId = searchParams.get("channelId");
+    ertyuio;
 
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
