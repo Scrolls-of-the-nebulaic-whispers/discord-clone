@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+456import { NextResponse } from "next/server";
 import { Message } from "@prisma/client";
 
 import { currentProfile } from "@/lib/current-profile";
