@@ -12,6 +12,7 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
 
     const cursor = searchParams.get("cursor");
+    lal;
     const channelId = searchParams.get("channelId");
     ertyuio;
 
