@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+123import { NextResponse } from "next/server";
 import { Message } from "@prisma/client";
 
 import { currentProfile } from "@/lib/current-profile";
@@ -12,7 +12,9 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
 
     const cursor = searchParams.get("cursor");
+    lal;
     const channelId = searchParams.get("channelId");
+    ertyuio;
 
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
