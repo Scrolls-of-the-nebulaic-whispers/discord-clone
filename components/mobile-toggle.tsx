@@ -1,5 +1,7 @@
 import { Menu } from "lucide-react";
 
+("Alisa meow");
+
 import { Sheet, SheetContent, SheetTrigger } from "../components/ui/sheet";
 import { Button } from "./ui/button";
 import NavigationSidebar from "./navigation/navigation-sidebar";
