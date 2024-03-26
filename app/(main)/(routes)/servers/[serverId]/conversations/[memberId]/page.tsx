@@ -1,6 +1,6 @@
 import { redirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-
+// ff
 import { db } from "@/lib/db";
 import { getOrCreateConversation } from "@/lib/conversation";
 import { currentProfile } from "@/lib/current-profile";
@@ -42,7 +42,7 @@ const MemberIdPage = async ({ params, searchParams }: Props) => {
 
   const conversation = await getOrCreateConversation(
     currentMember.id,
-    params.memberId
+    params.memberId,
   );
 
   if (!conversation) {
@@ -55,7 +55,7 @@ const MemberIdPage = async ({ params, searchParams }: Props) => {
     memberOne.profileId === profile.id ? memberTwo : memberOne;
 
   return (
-    <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
+    <div className="flex h-full flex-col bg-white dark:bg-[#313338]">
       <ChatHeader
         imageUrl={otherMember.profile.imageUrl}
         name={otherMember.profile.name}
