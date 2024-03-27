@@ -34,7 +34,7 @@ export default function RootLayout({
             storageKey="discord-theme"
           >
             <SocketProvider>
-              fwefwe
+              fwefwefwe
               <ModalProvider />
               <QueryProvider>{children}</QueryProvider>
             </SocketProvider>
