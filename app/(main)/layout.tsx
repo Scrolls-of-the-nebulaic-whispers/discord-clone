@@ -9,6 +9,7 @@ const MainLayout = async ({ children }: { children: ReactNode }) => {
         <NavigationSidebar />
       </div>
       <main className="md:pl-[72px] h-full">{children}</main>
+      fefwe
     </div>
   );
 };
