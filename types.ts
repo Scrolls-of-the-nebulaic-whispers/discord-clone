@@ -14,3 +14,5 @@ export type NextApiResponseServerIo = NextApiResponse & {
     };
   };
 };
+
+console.log(1);
