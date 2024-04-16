@@ -3,18 +3,19 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Member, Message, Profile } from "@prisma/client";
 
 import { useSocket } from "@/components/providers/socket-provider";
+console.log(2);
 
 type ChatSocketProps = {
   addKey: string;
   updateKey: string;
   queryKey: string;
-}
+};
 
 type MessageWithMemberWithProfile = Message & {
   member: Member & {
     profile: Profile;
-  }
-}
+  };
+};
 
 export const useChatSocket = ({
   addKey,
@@ -44,39 +45,38 @@ export const useChatSocket = ({
               }
               return item;
             })
-          }
+          };
         });
 
         return {
           ...oldData,
-          pages: newData,
-        }
-      })
+          pages: newData
+        };
+      });
     });
 
     socket.on(addKey, (message: MessageWithMemberWithProfile) => {
       queryClient.setQueryData([queryKey], (oldData: any) => {
         if (!oldData || !oldData.pages || oldData.pages.length === 0) {
           return {
-            pages: [{
-              items: [message],
-            }]
-          }
+            pages: [
+              {
+                items: [message]
+              }
+            ]
+          };
         }
 
         const newData = [...oldData.pages];
 
         newData[0] = {
           ...newData[0],
-          items: [
-            message,
-            ...newData[0].items,
-          ]
+          items: [message, ...newData[0].items]
         };
 
         return {
           ...oldData,
-          pages: newData,
+          pages: newData
         };
       });
     });
@@ -84,6 +84,6 @@ export const useChatSocket = ({
     return () => {
       socket.off(addKey);
       socket.off(updateKey);
-    }
+    };
   }, [queryClient, addKey, queryKey, socket, updateKey]);
-}
+};
